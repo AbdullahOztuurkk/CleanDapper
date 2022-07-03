@@ -13,6 +13,12 @@ namespace DapperORM.Application.Validations.Create
                 .MinimumLength(3)
                 .MaximumLength(250)
                 .WithMessage(ValidationMessages.Category_Description_Length_Error);
+
+            RuleFor(p => p.Name)
+                .NotEmpty()
+                .MinimumLength(0)
+                .MaximumLength(30)
+                .WithMessage(ValidationMessages.Category_Name_Length_Error);
         }
     }
 }

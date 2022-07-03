@@ -8,7 +8,6 @@
     <Folder Include="Commands\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Queries\" />
-    <Folder Include="Validations\Delete\" />
   </ItemGroup>
 
   <ItemGroup>
