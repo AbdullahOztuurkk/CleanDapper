@@ -7,8 +7,16 @@
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="Validations\" />
     <Folder Include="Queries\" />
+    <Folder Include="Validations\Delete\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DapperORM.Domain\DapperORM.Domain.csproj" />
   </ItemGroup>
 
 </Project>
