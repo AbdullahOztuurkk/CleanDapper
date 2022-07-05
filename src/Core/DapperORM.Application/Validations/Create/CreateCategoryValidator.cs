@@ -4,9 +4,9 @@ using FluentValidation;
 
 namespace DapperORM.Application.Validations.Create
 {
-    public class AddCategoryValidator:AbstractValidator<Category>
+    public class CreateCategoryValidator:AbstractValidator<Category>
     {
-        public AddCategoryValidator()
+        public CreateCategoryValidator()
         {
             RuleFor(p => p.Description)
                 .NotEmpty()

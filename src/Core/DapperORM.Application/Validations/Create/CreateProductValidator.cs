@@ -5,9 +5,9 @@ using System.Drawing;
 
 namespace DapperORM.Application.Validations.Create
 {
-    public class AddProductValidator : AbstractValidator<Product>
+    public class CreateProductValidator : AbstractValidator<Product>
     {
-        public AddProductValidator()
+        public CreateProductValidator()
         {
             RuleFor(p => p.Name)
                 .NotEmpty()
