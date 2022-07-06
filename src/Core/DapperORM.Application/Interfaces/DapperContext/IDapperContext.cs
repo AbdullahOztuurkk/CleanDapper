@@ -1,8 +1,11 @@
-﻿namespace DapperORM.Application.Interfaces.DapperContext
+﻿using System;
+using System.Data.SqlClient;
+
+namespace DapperORM.Application.Interfaces.DapperContext
 {
     public interface IDapperContext
     {
-        public void Setup();
-        public T Execute<T>();
+        public SqlConnection GetConnection();
+        public void Execute(Action<SqlConnection> @event);
     }
 }
