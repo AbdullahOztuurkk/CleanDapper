@@ -8,10 +8,10 @@ namespace DapperORM.Application.Interfaces.Repositories
 {
     public interface IGenericRepository<T> where T: BaseEntity
     {
-        Task<List<T>> GetAsync();
-        Task<List<T>> GetWhereAsync(Expression<Func<T, bool>> expression);
-        Task<T> GetByIdAsync(Guid id);
-        Task<T> AddAsync(T model);
-        Task<T> RemoveAsync(Guid Id);
+        T Get(int id);
+        void Add(T entity);
+        void Update(T entity);
+        void Delete(T entity);
+        List<T> GetAll();
     }
 }
