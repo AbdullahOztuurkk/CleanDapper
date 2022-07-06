@@ -5,9 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
     <Folder Include="Configurations\" />
-    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.0.123" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\DapperORM.Application\DapperORM.Application.csproj" />
   </ItemGroup>
 
 </Project>
