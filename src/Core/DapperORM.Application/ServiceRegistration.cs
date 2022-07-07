@@ -1,8 +1,9 @@
-﻿using MediatR;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
-namespace DapperORM.Persistence
+namespace DapperORM.Application
 {
     public static class ServiceRegistration
     {
@@ -10,6 +11,7 @@ namespace DapperORM.Persistence
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         }
     }
 }
