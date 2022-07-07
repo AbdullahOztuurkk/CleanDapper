@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="Interfaces\" />
     <Folder Include="MappingConfiguration\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
