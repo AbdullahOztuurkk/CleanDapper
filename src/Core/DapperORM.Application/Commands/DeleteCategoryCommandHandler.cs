@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DapperORM.Application.Commands
 {
-    public class DeleteCategoryCommand : IRequest<IResult>
+    public class DeleteCategoryCommandRequest : IRequest<IResult>
     {
         public int Id { get; set; }
     }
 
-    public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, IResult>
+    public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommandRequest, IResult>
     {
         ICategoryRepository categoryRepository;
         public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository)
@@ -20,7 +20,7 @@ namespace DapperORM.Application.Commands
             this.categoryRepository = categoryRepository;
         }
 
-        public Task<IResult> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
+        public Task<IResult> Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
         {
             //business logic
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Category_Deleted));

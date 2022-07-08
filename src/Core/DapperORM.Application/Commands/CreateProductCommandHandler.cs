@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DapperORM.Application.Commands
 {
-    public class CreateProductCommand : IRequest<IResult>
+    public class CreateProductCommandRequest : IRequest<IResult>
     {
         public string Name { get; set; }
         public int QuantityPerUnit { get; set; }
@@ -18,7 +18,7 @@ namespace DapperORM.Application.Commands
         public int UnitsInStock { get; set; }
     }
 
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand, IResult>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, IResult>
     {
         private readonly IProductRepository productRepository;
         private readonly IMapper mapper;
@@ -32,7 +32,7 @@ namespace DapperORM.Application.Commands
             this.validator = validator;
             this.mapper = mapper;
         }
-        public Task<IResult> Handle(CreateProductCommand request, CancellationToken cancellationToken) 
+        public Task<IResult> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken) 
         {
             //business logic
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Product_Added));
