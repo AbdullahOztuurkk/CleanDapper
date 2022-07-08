@@ -12,4 +12,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\DapperORM.Application\DapperORM.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\DapperORM.Persistence\DapperORM.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

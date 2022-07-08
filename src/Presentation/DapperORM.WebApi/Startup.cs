@@ -1,3 +1,5 @@
+using DapperORM.Application;
+using DapperORM.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,9 +30,20 @@ namespace DapperORM.WebApi
         {
 
             services.AddControllers();
+            services.AddPersistenceDependencies();
+            services.AddApplicationDependencies();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "DapperORM.WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {
+                    Title = "DapperORM.WebApi",
+                    Description = "Dapper Tutorial with Clean Architecture",
+                    Contact = new OpenApiContact
+                    {
+                        Email = "oabdullahozturk@yandex.com",
+                        Name = "Abdullah Öztürk",
+                        Url = new Uri("https://abdullahozturk.live"),
+                    },
+                    Version = "v1" });
             });
         }
 
