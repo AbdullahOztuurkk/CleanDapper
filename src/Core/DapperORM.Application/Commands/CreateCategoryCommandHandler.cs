@@ -3,6 +3,7 @@ using DapperORM.Application.Interfaces.Repositories;
 using DapperORM.Application.Validations.Create;
 using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Constants;
+using DapperORM.Domain.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,7 +32,8 @@ namespace DapperORM.Application.Commands
         }
         public Task<IResult> Handle(CreateCategoryCommandRequest request, CancellationToken cancellationToken)
         {
-            //business logic
+            var category = mapper.Map<Category>(request);
+            categoryRepository.Add(category);
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Category_Added));
         }
     }

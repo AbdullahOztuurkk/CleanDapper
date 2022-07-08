@@ -11,7 +11,7 @@ namespace DapperORM.Application.Queries
     public class GetAllProductQueryRequest : IRequest<IDataResult<List<Product>>> { }
     public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, IDataResult<List<Product>>>
     {
-        IProductRepository productRepository;
+        private readonly IProductRepository productRepository;
         public GetAllProductQueryHandler(IProductRepository productRepository)
         {
             this.productRepository = productRepository;

@@ -14,7 +14,7 @@ namespace DapperORM.Application.Queries
 
     public class GetCategoryQueryHandler : IRequestHandler<GetCategoryQueryRequest, IDataResult<Category>>
     {
-        ICategoryRepository categoryRepository;
+        private readonly ICategoryRepository categoryRepository;
         public GetCategoryQueryHandler(ICategoryRepository categoryRepository)
         {
             this.categoryRepository = categoryRepository;

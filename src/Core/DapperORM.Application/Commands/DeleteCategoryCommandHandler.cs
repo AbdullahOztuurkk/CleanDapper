@@ -1,6 +1,8 @@
-﻿using DapperORM.Application.Interfaces.Repositories;
+﻿using AutoMapper;
+using DapperORM.Application.Interfaces.Repositories;
 using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Constants;
+using DapperORM.Domain.Entities;
 using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,15 +16,18 @@ namespace DapperORM.Application.Commands
 
     public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommandRequest, IResult>
     {
-        ICategoryRepository categoryRepository;
-        public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository)
+        private readonly ICategoryRepository categoryRepository;
+        private readonly IMapper mapper;
+        public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper)
         {
             this.categoryRepository = categoryRepository;
+            this.mapper = mapper;
         }
 
         public Task<IResult> Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
         {
-            //business logic
+            Category category = mapper.Map<Category>(request);
+            categoryRepository.Delete(category);
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Category_Deleted));
         }
     }
