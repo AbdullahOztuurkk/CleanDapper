@@ -72,12 +72,13 @@ namespace DapperORM.Persistence.Repositories
 
         public List<T> GetAll()
         {
-        var query = $"select * from {tableName}";
+            var query = $"select * from {tableName}";
 
-        using (var conn = dapperContext.GetConnection())
-        {
-            conn.Open();
-            return (List<T>)conn.Query<T>(query);
+            using (var conn = dapperContext.GetConnection())
+            {
+                conn.Open();
+                return (List<T>)conn.Query<T>(query);
+            }
         }
     }
 }
