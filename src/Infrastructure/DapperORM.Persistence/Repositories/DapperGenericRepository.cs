@@ -11,9 +11,11 @@ namespace DapperORM.Persistence.Repositories
     public abstract class DapperGenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
         IDapperContext dapperContext;
-        public DapperGenericRepository(IDapperContext dapperContext)
+        private string tableName;
+        public DapperGenericRepository(IDapperContext dapperContext, string tableName)
         {
             this.dapperContext = dapperContext;
+            this.tableName = tableName;
         }
         private IEnumerable<string> GetColumns()
         {
@@ -28,7 +30,7 @@ namespace DapperORM.Persistence.Repositories
             var columns = GetColumns();
             var stringOfColumns = string.Join(", ", columns);
             var stringOfParameters = string.Join(", ", columns.Select(e => "@" + e));
-            var query = $"insert into {typeof(T).Name}s ({stringOfColumns}) values ({stringOfParameters})";
+            var query = $"insert into {tableName} ({stringOfColumns}) values ({stringOfParameters})";
             
             dapperContext.Execute((conn) => {
                 conn.Execute(query, entity);
@@ -37,7 +39,7 @@ namespace DapperORM.Persistence.Repositories
 
         public void Delete(T entity)
         {
-            var query = $"delete from {typeof(T).Name}s where Id = @Id";
+            var query = $"delete from {tableName} where Id = @Id";
 
             dapperContext.Execute((conn) => {
                 conn.Execute(query, entity);
@@ -49,7 +51,7 @@ namespace DapperORM.Persistence.Repositories
         {
             var columns = GetColumns();
             var stringOfColumns = string.Join(", ", columns.Select(e => $"{e} = @{e}"));
-            var query = $"update {typeof(T).Name}s set {stringOfColumns} where Id = @Id";
+            var query = $"update {tableName} set {stringOfColumns} where Id = @Id";
 
             dapperContext.Execute((conn) => {
                 conn.Execute(query, entity);
@@ -59,7 +61,7 @@ namespace DapperORM.Persistence.Repositories
 
         public T Get(int id)
         {
-            var query = $"select * from {typeof(T).Name}s where Id = @Id ";
+            var query = $"select * from {tableName} where Id = @Id ";
 
             using(var conn = dapperContext.GetConnection())
             {
@@ -70,7 +72,7 @@ namespace DapperORM.Persistence.Repositories
 
         public List<T> GetAll()
         {
-        var query = $"select * from {typeof(T).Name}s";
+        var query = $"select * from {tableName}";
 
         using (var conn = dapperContext.GetConnection())
         {
