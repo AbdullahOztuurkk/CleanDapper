@@ -7,7 +7,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DapperORM.Application.Commands.DeleteEvent
+namespace DapperORM.Application.Features.Commands.DeleteEvent
 {
     public class DeleteCategoryCommandRequest : IRequest<IResult>
     {

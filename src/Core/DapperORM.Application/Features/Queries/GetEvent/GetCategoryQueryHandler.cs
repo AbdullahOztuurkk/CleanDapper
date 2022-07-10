@@ -5,7 +5,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DapperORM.Application.Queries
+namespace DapperORM.Application.Features.Queries.GetEvent
 {
     public class GetCategoryQueryRequest : IRequest<IDataResult<Category>>
     {

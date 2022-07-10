@@ -2,11 +2,10 @@
 using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Entities;
 using MediatR;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DapperORM.Application.Queries
+namespace DapperORM.Application.Features.Queries.GetEvent
 {
     public class GetProductQueryRequest : IRequest<IDataResult<Product>>
     {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DapperORM.Application.Queries
+namespace DapperORM.Application.Features.Queries.GetAllEvent
 {
     public class GetAllCategoryQueryRequest : IRequest<IDataResult<List<Category>>> { }
     public class GetAllCategoryQueryHandler : IRequestHandler<GetAllCategoryQueryRequest, IDataResult<List<Category>>>

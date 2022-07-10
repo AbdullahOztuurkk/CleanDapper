@@ -8,7 +8,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DapperORM.Application.Commands.CreateEvent
+namespace DapperORM.Application.Features.Commands.CreateEvent
 {
     public class CreateProductCommandRequest : IRequest<IResult>
     {
