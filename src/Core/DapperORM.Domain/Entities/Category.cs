@@ -13,6 +13,7 @@ namespace DapperORM.Domain.Entities
         public string Description { get; set; }
 
         //Navigation property
-        public List<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; }
+
     }
 }
