@@ -10,7 +10,7 @@ namespace DapperORM.Persistence.Repositories
 {
     public abstract class DapperGenericRepository<T> : IGenericRepository<T> where T : BaseEntity
     {
-        IDapperContext dapperContext;
+        public IDapperContext dapperContext;
         private string tableName;
         public DapperGenericRepository(IDapperContext dapperContext, string tableName)
         {
