@@ -8,7 +8,7 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace DapperORM.Application.Commands
+namespace DapperORM.Application.Commands.CreateEvent
 {
     public class CreateCategoryCommandRequest: IRequest<IResult>
     {
