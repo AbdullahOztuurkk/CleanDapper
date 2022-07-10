@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DapperORM.Application.Interfaces.Repositories;
+using DapperORM.Application.Validations.Common;
 using DapperORM.Application.Validations.Create;
 using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Constants;
@@ -36,6 +37,7 @@ namespace DapperORM.Application.Features.Commands.CreateEvent
         public Task<IResult> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken) 
         {
             Product product = mapper.Map<Product>(request);
+            EntityValidator.Validate(validator, product);
             productRepository.Add(product);
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Product_Added));
         }

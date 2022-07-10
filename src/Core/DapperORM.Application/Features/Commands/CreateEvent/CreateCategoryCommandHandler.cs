@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DapperORM.Application.Interfaces.Repositories;
+using DapperORM.Application.Validations.Common;
 using DapperORM.Application.Validations.Create;
 using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Constants;
@@ -33,6 +34,7 @@ namespace DapperORM.Application.Features.Commands.CreateEvent
         public Task<IResult> Handle(CreateCategoryCommandRequest request, CancellationToken cancellationToken)
         {
             var category = mapper.Map<Category>(request);
+            EntityValidator.Validate(validator, category);
             categoryRepository.Add(category);
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Category_Added));
         }

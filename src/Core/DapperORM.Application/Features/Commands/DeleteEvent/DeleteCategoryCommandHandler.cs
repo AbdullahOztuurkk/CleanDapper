@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using DapperORM.Application.Interfaces.Repositories;
+using DapperORM.Application.Validations.Common;
+using DapperORM.Application.Validations.Delete;
 using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Constants;
 using DapperORM.Domain.Entities;
@@ -17,16 +19,19 @@ namespace DapperORM.Application.Features.Commands.DeleteEvent
     public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommandRequest, IResult>
     {
         private readonly ICategoryRepository categoryRepository;
+        private readonly DeleteCategoryValidator validator;
         private readonly IMapper mapper;
-        public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper)
+        public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper, DeleteCategoryValidator validator)
         {
             this.categoryRepository = categoryRepository;
             this.mapper = mapper;
+            this.validator = validator;
         }
 
         public Task<IResult> Handle(DeleteCategoryCommandRequest request, CancellationToken cancellationToken)
         {
             Category category = mapper.Map<Category>(request);
+            EntityValidator.Validate(validator, category);
             categoryRepository.Delete(category);
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Category_Deleted));
         }
