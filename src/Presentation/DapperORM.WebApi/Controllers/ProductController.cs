@@ -33,7 +33,7 @@ namespace DapperORM.WebApi.Controllers
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
                 return BadRequest(result.Message);
-            return Ok(await mediator.Send(request));
+            return Ok(result);
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace DapperORM.WebApi.Controllers
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
                 return BadRequest(result.Message);
-            return Ok(await mediator.Send(request));
+            return Ok(result);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace DapperORM.WebApi.Controllers
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
                 return BadRequest(result.Message);
-            return Ok(await mediator.Send(request));
+            return Ok(result);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace DapperORM.WebApi.Controllers
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
                 return BadRequest(result.Message);
-            return Ok(await mediator.Send(request));
+            return Ok(result);
         }
         /// <summary>
         /// Delete product from System
@@ -96,7 +96,7 @@ namespace DapperORM.WebApi.Controllers
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
                 return BadRequest(result.Message);
-            return Ok(await mediator.Send(request));
+            return Ok(result);
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace DapperORM.WebApi.Controllers
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
                 return BadRequest(result.Message);
-            return Ok(await mediator.Send(request));
+            return Ok(result);
         }
     }
 }
