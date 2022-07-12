@@ -8,9 +8,8 @@ namespace DapperORM.Application.Validations.Common
         public static IRuleBuilderOptions<T, int> CheckIdentifierNumber<T>(this IRuleBuilder<T, int> ruleBuilder)
         {
             return ruleBuilder
-                .NotEmpty()
-                .NotNull()
-                .WithMessage(ValidationMessages.Id_Cannot_Be_Empty);
+                .NotEmpty().WithMessage(ValidationMessages.Id_Cannot_Be_Empty)
+                .NotNull().WithMessage(ValidationMessages.Id_Cannot_Be_Empty);
         }
     }
 }
