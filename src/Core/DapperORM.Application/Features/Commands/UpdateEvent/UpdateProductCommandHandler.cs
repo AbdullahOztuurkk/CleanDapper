@@ -6,6 +6,7 @@ using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Constants;
 using DapperORM.Domain.Entities;
 using MediatR;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -37,7 +38,9 @@ namespace DapperORM.Application.Features.Commands.UpdateEvent
         public Task<IResult> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)
         {
             var product = mapper.Map<Product>(request);
-            EntityValidator.Validate(validator, product);
+            var result = validator.Validate(product);
+            if (result.Errors.Any())
+                return Task.FromResult<IResult>(new ErrorResult(result.Errors.First().ErrorMessage));
             productRepository.Update(product);
             return Task.FromResult<IResult>(new SuccessResult(ResultMessages.Product_Updated));
         }
