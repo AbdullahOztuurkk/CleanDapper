@@ -2,17 +2,11 @@ using DapperORM.Application;
 using DapperORM.Persistence;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
+using NSwag;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DapperORM.WebApi
 {
@@ -30,21 +24,21 @@ namespace DapperORM.WebApi
         {
 
             services.AddControllers();
-            services.AddPersistenceDependencies();
-            services.AddApplicationDependencies();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo {
-                    Title = "DapperORM.WebApi",
-                    Description = "Dapper Tutorial with Clean Architecture",
-                    Contact = new OpenApiContact
+            services.AddSwaggerDocument(config =>
+                config.PostProcess = ( settings => {
+                    settings.Info.Title = "DapperORM.WebApi";
+                    settings.Info.Description = "Dapper Tutorial with Clean Architecture";
+                    settings.Info.Contact = new OpenApiContact
                     {
                         Email = "oabdullahozturk@yandex.com",
                         Name = "Abdullah Öztürk",
-                        Url = new Uri("https://abdullahozturk.live"),
-                    },
-                    Version = "v1" });
-            });
+                        Url = "https://abdullahozturk.live",
+                    };
+                    settings.Info.Version = "v1";
+                }
+            ));
+            services.AddPersistenceDependencies();
+            services.AddApplicationDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,15 +47,18 @@ namespace DapperORM.WebApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DapperORM.WebApi v1"));
             }
+
+            app.UseOpenApi();
+
+            app.UseSwaggerUi3();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {

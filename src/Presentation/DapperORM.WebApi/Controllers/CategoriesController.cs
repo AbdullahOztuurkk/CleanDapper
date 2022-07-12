@@ -4,13 +4,14 @@ using DapperORM.Application.Features.Commands.UpdateEvent;
 using DapperORM.Application.Features.Queries.GetAllEvent;
 using DapperORM.Application.Features.Queries.GetEvent;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace DapperORM.WebApi.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/categories/[action]")]
     public class CategoriesController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -25,9 +26,8 @@ namespace DapperORM.WebApi.Controllers
         /// </summary>
         /// <param name="request">Empty request body</param>
         /// <returns>List of categories</returns>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [HttpGet("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllCategoryQueryRequest request)
         {
             var result = await mediator.Send(request);
@@ -41,9 +41,9 @@ namespace DapperORM.WebApi.Controllers
         /// </summary>
         /// <param name="request">Category identifier number</param>
         /// <returns>A Category</returns>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [HttpGet("/{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet]
         public async Task<IActionResult> Get([FromQuery] GetCategoryQueryRequest request)
         {
             var result = await mediator.Send(request);
@@ -56,9 +56,8 @@ namespace DapperORM.WebApi.Controllers
         /// Add category to System
         /// </summary>
         /// <param name="request">Category body</param>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [Route("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateCategoryCommandRequest request)
         {
@@ -72,9 +71,8 @@ namespace DapperORM.WebApi.Controllers
         /// Delete category from System
         /// </summary>
         /// <param name="request">Category identifier number</param>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [Route("/{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] DeleteCategoryCommandRequest request)
         {
@@ -88,9 +86,8 @@ namespace DapperORM.WebApi.Controllers
         /// Update category in System
         /// </summary>
         /// <param name="request">Category features</param>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [Route("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateCategoryCommandRequest request)
         {

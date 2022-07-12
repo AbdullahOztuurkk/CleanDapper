@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DapperORM.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:DapperORM.WebApi.Controllers.CategoriesController.GetAll(DapperORM.Application.Features.Queries.GetAllEvent.GetAllCategoryQueryRequest)">
+            <summary>
+            Get all categories
+            </summary>
+            <param name="request">Empty request body</param>
+            <returns>List of categories</returns>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.CategoriesController.Get(DapperORM.Application.Features.Queries.GetEvent.GetCategoryQueryRequest)">
+            <summary>
+            Get category by Id
+            </summary>
+            <param name="request">Category identifier number</param>
+            <returns>A Category</returns>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.CategoriesController.Create(DapperORM.Application.Features.Commands.CreateEvent.CreateCategoryCommandRequest)">
+            <summary>
+            Add category to System
+            </summary>
+            <param name="request">Category body</param>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.CategoriesController.Delete(DapperORM.Application.Features.Commands.DeleteEvent.DeleteCategoryCommandRequest)">
+            <summary>
+            Delete category from System
+            </summary>
+            <param name="request">Category identifier number</param>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.CategoriesController.Update(DapperORM.Application.Features.Commands.UpdateEvent.UpdateCategoryCommandRequest)">
+            <summary>
+            Update category in System
+            </summary>
+            <param name="request">Category features</param>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.ProductController.GetAll(DapperORM.Application.Features.Queries.GetAllEvent.GetAllProductQueryRequest)">
+            <summary>
+            Get all products
+            </summary>
+            <param name="request">Empty request body</param>
+            <returns>List of products</returns>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.ProductController.GetAllByCategory(DapperORM.Application.Features.Queries.GetEvent.GetProductByCategoryQueryRequest)">
+            <summary>
+            Get all products by category
+            </summary>
+            <param name="request">Category identifier number</param>
+            <returns>List of products</returns>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.ProductController.Get(DapperORM.Application.Features.Queries.GetEvent.GetProductQueryRequest)">
+            <summary>
+            Get product by Id
+            </summary>
+            <param name="request">Product identifier number</param>
+            <returns>A product</returns>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.ProductController.Create(DapperORM.Application.Features.Commands.CreateEvent.CreateProductCommandRequest)">
+            <summary>
+            Add Product to System
+            </summary>
+            <param name="request">Product body</param>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.ProductController.Delete(DapperORM.Application.Features.Commands.DeleteEvent.DeleteProductCommandRequest)">
+            <summary>
+            Delete product from System
+            </summary>
+            <param name="request">Product identifier number</param>
+        </member>
+        <member name="M:DapperORM.WebApi.Controllers.ProductController.Update(DapperORM.Application.Features.Commands.UpdateEvent.UpdateProductCommandRequest)">
+            <summary>
+            Update product in System
+            </summary>
+            <param name="request">Product features</param>
+        </member>
+    </members>
+</doc>

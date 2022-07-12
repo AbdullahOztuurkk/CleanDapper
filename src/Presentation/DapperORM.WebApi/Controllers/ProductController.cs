@@ -3,13 +3,15 @@ using DapperORM.Application.Features.Commands.DeleteEvent;
 using DapperORM.Application.Features.Commands.UpdateEvent;
 using DapperORM.Application.Features.Queries.GetAllEvent;
 using DapperORM.Application.Features.Queries.GetEvent;
+using DapperORM.Domain.Common.Result;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace DapperORM.WebApi.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/products/[action]")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -25,9 +27,8 @@ namespace DapperORM.WebApi.Controllers
         /// </summary>
         /// <param name="request">Empty request body</param>
         /// <returns>List of products</returns>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [HttpGet("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpGet]
         public async Task<IActionResult> GetAll([FromQuery] GetAllProductQueryRequest request)
         {
             var result = await mediator.Send(request);
@@ -41,9 +42,9 @@ namespace DapperORM.WebApi.Controllers
         /// </summary>
         /// <param name="request">Category identifier number</param>
         /// <returns>List of products</returns>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [HttpGet("/c/{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet]
         public async Task<IActionResult> GetAllByCategory([FromQuery] GetProductByCategoryQueryRequest request)
         {
             var result = await mediator.Send(request);
@@ -57,10 +58,10 @@ namespace DapperORM.WebApi.Controllers
         /// </summary>
         /// <param name="request">Product identifier number</param>
         /// <returns>A product</returns>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [HttpGet("/{Id}")]
-        public async Task<IActionResult> Get([FromQuery] GetProductQueryRequest request)
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [HttpGet]
+        public async Task<IActionResult> Get(GetProductQueryRequest request)
         {
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
@@ -72,9 +73,8 @@ namespace DapperORM.WebApi.Controllers
         /// Add Product to System
         /// </summary>
         /// <param name="request">Product body</param>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [Route("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateProductCommandRequest request)
         {
@@ -83,13 +83,13 @@ namespace DapperORM.WebApi.Controllers
                 return BadRequest(result.Message);
             return Ok(result);
         }
+
         /// <summary>
         /// Delete product from System
         /// </summary>
         /// <param name="request">Product identifier number</param>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [Route("/{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpDelete]
         public async Task<IActionResult> Delete([FromQuery] DeleteProductCommandRequest request)
         {
@@ -103,9 +103,8 @@ namespace DapperORM.WebApi.Controllers
         /// Update product in System
         /// </summary>
         /// <param name="request">Product features</param>
-        /// <response code="200">Ok</response>
-        /// <response code="400"> Bad Request</response>
-        [Route("/")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPut]
         public async Task<IActionResult> Update([FromBody] UpdateProductCommandRequest request)
         {
