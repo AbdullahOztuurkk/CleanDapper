@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace DapperORM.WebApi.Controllers
 {
     [ApiController]
-    [Route("api/categories/[action]")]
+    [Route("api/categories")]
     public class CategoriesController : ControllerBase
     {
         private readonly IMediator mediator;
@@ -27,7 +27,7 @@ namespace DapperORM.WebApi.Controllers
         /// <param name="request">Empty request body</param>
         /// <returns>List of categories</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllCategoryQueryRequest request)
         {
             var result = await mediator.Send(request);
@@ -43,7 +43,7 @@ namespace DapperORM.WebApi.Controllers
         /// <returns>A Category</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpGet]
+        [HttpGet(":Id")]
         public async Task<IActionResult> Get([FromQuery] GetCategoryQueryRequest request)
         {
             var result = await mediator.Send(request);

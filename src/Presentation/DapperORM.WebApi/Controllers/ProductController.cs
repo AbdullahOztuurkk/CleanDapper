@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DapperORM.WebApi.Controllers
 {
-    [Route("api/products/[action]")]
+    [Route("api/products")]
     [ApiController]
     public class ProductController : ControllerBase
     {
@@ -28,7 +28,7 @@ namespace DapperORM.WebApi.Controllers
         /// <param name="request">Empty request body</param>
         /// <returns>List of products</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [HttpGet]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAll([FromQuery] GetAllProductQueryRequest request)
         {
             var result = await mediator.Send(request);
@@ -44,7 +44,7 @@ namespace DapperORM.WebApi.Controllers
         /// <returns>List of products</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpGet]
+        [HttpGet("get-all-by-category")]
         public async Task<IActionResult> GetAllByCategory([FromQuery] GetProductByCategoryQueryRequest request)
         {
             var result = await mediator.Send(request);
@@ -60,8 +60,8 @@ namespace DapperORM.WebApi.Controllers
         /// <returns>A product</returns>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [HttpGet]
-        public async Task<IActionResult> Get(GetProductQueryRequest request)
+        [HttpGet(":Id")]
+        public async Task<IActionResult> Get([FromQuery] GetProductQueryRequest request)
         {
             var result = await mediator.Send(request);
             if (result.IsSuccess == false)
