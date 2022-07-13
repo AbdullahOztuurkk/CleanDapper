@@ -10,7 +10,7 @@ namespace DapperORM.Domain.Entities
         public string Color { get; set; }
         public int UnitsInStock { get; set; }
 
-        //Navigation Property
-        public Category Category { get; set; }
+        //Foreign Key Property
+        public int CategoryId { get; set; }
     }
 }

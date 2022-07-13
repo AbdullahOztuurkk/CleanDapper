@@ -18,6 +18,7 @@ namespace DapperORM.Application.Features.Commands.CreateEvent
         public int UnitPrice { get; set; }
         public string Color { get; set; }
         public int UnitsInStock { get; set; }
+        public int CategoryId { get; set; }
     }
 
     public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, IResult>
