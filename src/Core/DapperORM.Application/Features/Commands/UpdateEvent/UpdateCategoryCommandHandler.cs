@@ -23,10 +23,11 @@ namespace DapperORM.Application.Features.Commands.UpdateEvent
         private readonly ICategoryRepository categoryRepository;
         private readonly UpdateCategoryValidator validator;
         private readonly IMapper mapper;
-        public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper)
+        public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository, IMapper mapper, UpdateCategoryValidator validator)
         {
             this.categoryRepository = categoryRepository;
             this.mapper = mapper;
+            this.validator = validator;
         }
         public Task<IResult> Handle(UpdateCategoryCommandRequest request, CancellationToken cancellationToken)
         {
