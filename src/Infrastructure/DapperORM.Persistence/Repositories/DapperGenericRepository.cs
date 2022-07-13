@@ -2,6 +2,7 @@
 using DapperORM.Application.Interfaces.DapperContext;
 using DapperORM.Application.Interfaces.Repositories;
 using DapperORM.Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +22,9 @@ namespace DapperORM.Persistence.Repositories
         {
             return typeof(T)
                     .GetProperties()
-                    .Where(e => e.Name != "Id" && !e.PropertyType.GetTypeInfo().IsGenericType)
+                    .Where(e => e.Name != "Id" 
+                    && !e.PropertyType.GetTypeInfo().IsGenericType 
+                    && !Attribute.IsDefined(e,typeof(DapperIgnoreAttribute)))
                     .Select(e => e.Name);
         }
 
