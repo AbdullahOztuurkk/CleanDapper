@@ -51,7 +51,7 @@ namespace DapperORM.Tests
                 UnitsInStock = 5
             };
 
-            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+            CreateProductCommandHandler handler = new CreateProductCommandHandler(
                 MockProductRepository.Object,
                 createValidator,
                 mapper);
@@ -75,7 +75,7 @@ namespace DapperORM.Tests
                 UnitsInStock = 5
             };
 
-            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+            CreateProductCommandHandler handler = new CreateProductCommandHandler(
                 MockProductRepository.Object,
                 createValidator,
                 mapper);
@@ -99,7 +99,7 @@ namespace DapperORM.Tests
                 UnitsInStock = 5
             };
 
-            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+            CreateProductCommandHandler handler = new CreateProductCommandHandler(
                 MockProductRepository.Object,
                 createValidator,
                 mapper);
@@ -123,7 +123,7 @@ namespace DapperORM.Tests
                 UnitsInStock = 5
             };
 
-            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+            CreateProductCommandHandler handler = new CreateProductCommandHandler(
                 MockProductRepository.Object,
                 createValidator,
                 mapper);
@@ -147,7 +147,7 @@ namespace DapperORM.Tests
                 QuantityPerUnit = 5
             };
 
-            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+            CreateProductCommandHandler handler = new CreateProductCommandHandler(
                 MockProductRepository.Object,
                 createValidator,
                 mapper);
@@ -165,7 +165,7 @@ namespace DapperORM.Tests
             //Delete request without identifier number property
             DeleteProductCommandRequest request = new DeleteProductCommandRequest { };
 
-            DeleteProductCommandHandler handler = handler = new DeleteProductCommandHandler(
+            DeleteProductCommandHandler handler = new DeleteProductCommandHandler(
                 MockProductRepository.Object,
                 mapper,
                 new DeleteProductValidator());
@@ -190,7 +190,7 @@ namespace DapperORM.Tests
                 QuantityPerUnit = 1
             };
 
-            UpdateProductCommandHandler handler = handler = new UpdateProductCommandHandler(
+            UpdateProductCommandHandler handler = new UpdateProductCommandHandler(
                 MockProductRepository.Object,
                 mapper,
                 new UpdateProductValidator());
