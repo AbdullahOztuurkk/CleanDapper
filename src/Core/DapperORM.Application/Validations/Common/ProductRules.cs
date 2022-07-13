@@ -33,8 +33,8 @@ namespace DapperORM.Application.Validations.Common
         public static IRuleBuilderOptions<T, int> CheckProductPrice<T>(this IRuleBuilder<T, int> ruleBuilder) where T : Product
         {
             return ruleBuilder
-                .NotEmpty().WithMessage(ValidationMessages.Product_Quantity_Must_Greater_Than_Zero)
-                .GreaterThan(0).WithMessage(ValidationMessages.Product_Quantity_Must_Greater_Than_Zero);
+                .NotEmpty().WithMessage(ValidationMessages.Product_Price_Must_Greater_Than_Or_Equal_To_Zero)
+                .GreaterThan(0).WithMessage(ValidationMessages.Product_Price_Must_Greater_Than_Or_Equal_To_Zero);
         }
 
         public static IRuleBuilderOptions<T, int> CheckProductStock<T>(this IRuleBuilder<T, int> ruleBuilder) where T : Product
