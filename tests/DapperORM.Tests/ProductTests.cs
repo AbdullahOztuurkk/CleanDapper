@@ -122,7 +122,7 @@ namespace DapperORM.Tests
         [Test]
         public async Task AddProduct_IfInvalidStock_MustThrownErrorResult()
         {
-            //Product instance without unit-price property
+            //Product instance without units-in-stock property
             request = new CreateProductCommandRequest
             {
                 Name = "Test Product",
