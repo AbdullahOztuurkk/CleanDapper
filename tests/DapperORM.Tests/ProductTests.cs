@@ -1,11 +1,14 @@
 using AutoMapper;
 using DapperORM.Application.Features.Commands.CreateEvent;
+using DapperORM.Application.Features.Commands.DeleteEvent;
+using DapperORM.Application.Features.Commands.UpdateEvent;
 using DapperORM.Application.Interfaces.Repositories;
 using DapperORM.Application.MappingConfiguration;
 using DapperORM.Application.Validations.Create;
+using DapperORM.Application.Validations.Delete;
+using DapperORM.Application.Validations.Update;
 using DapperORM.Domain.Common.Result;
 using DapperORM.Domain.Constants;
-using MediatR;
 using Moq;
 using NUnit.Framework;
 using System.Drawing;
@@ -20,8 +23,6 @@ namespace DapperORM.Tests
     {
         private Mock<IProductRepository> MockProductRepository;
         private CreateProductValidator createValidator;
-        private CreateProductCommandHandler handler;
-        private CreateProductCommandRequest request;
         private IMapper mapper;
 
         [SetUp]
@@ -36,24 +37,24 @@ namespace DapperORM.Tests
             });
 
             mapper = mapperConfig.CreateMapper();
-
-            handler = new CreateProductCommandHandler(
-                MockProductRepository.Object,
-                createValidator,
-                mapper);
         }
 
         [Test]
         public async Task AddProduct_IfInvalidName_MustThrownErrorResult()
         {
             //Product instance without name property
-            request = new CreateProductCommandRequest 
+            CreateProductCommandRequest request = new CreateProductCommandRequest 
             {
                 Color = nameof(KnownColor.Control),
                 QuantityPerUnit = 100,
                 UnitPrice = 200,
                 UnitsInStock = 5
             };
+
+            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+                MockProductRepository.Object,
+                createValidator,
+                mapper);
 
             var result = await handler.Handle(request, new System.Threading.CancellationToken());
 
@@ -66,13 +67,18 @@ namespace DapperORM.Tests
         public async Task AddProduct_IfInvalidColor_MustThrownErrorResult()
         {
             //Product instance without color property
-            request = new CreateProductCommandRequest
+            CreateProductCommandRequest request = new CreateProductCommandRequest
             {
                 Name = "Test Product",
                 QuantityPerUnit = 100,
                 UnitPrice = 200,
                 UnitsInStock = 5
             };
+
+            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+                MockProductRepository.Object,
+                createValidator,
+                mapper);
 
             var result = await handler.Handle(request, new System.Threading.CancellationToken());
 
@@ -85,13 +91,18 @@ namespace DapperORM.Tests
         public async Task AddProduct_IfInvalidUnitPrice_MustThrownErrorResult()
         {
             //Product instance without unit-price property
-            request = new CreateProductCommandRequest
+            CreateProductCommandRequest request = new CreateProductCommandRequest
             {
                 Name = "Test Product",
                 QuantityPerUnit = 100,
                 Color = "Control",
                 UnitsInStock = 5
             };
+
+            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+                MockProductRepository.Object,
+                createValidator,
+                mapper);
 
             var result = await handler.Handle(request, new System.Threading.CancellationToken());
 
@@ -104,13 +115,18 @@ namespace DapperORM.Tests
         public async Task AddProduct_IfInvalidQuantity_MustThrownErrorResult()
         {
             //Product instance without unit-price property
-            request = new CreateProductCommandRequest
+            CreateProductCommandRequest request = new CreateProductCommandRequest
             {
                 Name = "Test Product",
                 UnitPrice = 100,
                 Color = "Control",
                 UnitsInStock = 5
             };
+
+            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+                MockProductRepository.Object,
+                createValidator,
+                mapper);
 
             var result = await handler.Handle(request, new System.Threading.CancellationToken());
 
@@ -123,7 +139,7 @@ namespace DapperORM.Tests
         public async Task AddProduct_IfInvalidStock_MustThrownErrorResult()
         {
             //Product instance without units-in-stock property
-            request = new CreateProductCommandRequest
+            CreateProductCommandRequest request = new CreateProductCommandRequest
             {
                 Name = "Test Product",
                 UnitPrice = 100,
@@ -131,11 +147,59 @@ namespace DapperORM.Tests
                 QuantityPerUnit = 5
             };
 
+            CreateProductCommandHandler handler = handler = new CreateProductCommandHandler(
+                MockProductRepository.Object,
+                createValidator,
+                mapper);
+
             var result = await handler.Handle(request, new System.Threading.CancellationToken());
 
             Assert.IsInstanceOf<IResult>(result);
             Assert.IsFalse(result.IsSuccess);
             Assert.AreSame(ValidationMessages.Product_Stock_Must_Greater_Than_Zero, result.Message);
+        }
+
+        [Test]
+        public async Task DeleteProduct_IfInvalidIdentifierNumber_MustThrownErrorResult()
+        {
+            //Delete request without identifier number property
+            DeleteProductCommandRequest request = new DeleteProductCommandRequest { };
+
+            DeleteProductCommandHandler handler = handler = new DeleteProductCommandHandler(
+                MockProductRepository.Object,
+                mapper,
+                new DeleteProductValidator());
+
+            var result = await handler.Handle(request, new System.Threading.CancellationToken());
+
+            Assert.IsInstanceOf<IResult>(result);
+            Assert.IsFalse(result.IsSuccess);
+            Assert.AreSame(ValidationMessages.Id_Cannot_Be_Empty, result.Message);
+        }
+
+        [Test]
+        public async Task UpdateProduct_IfInvalidIdentifierNumber_MustThrownErrorResult()
+        {
+            //Delete request without identifier number property
+            UpdateProductCommandRequest request = new UpdateProductCommandRequest 
+            {
+                Name = "Test Product",
+                UnitPrice = 100,
+                Color = "Control",
+                UnitsInStock = 5,
+                QuantityPerUnit = 1
+            };
+
+            UpdateProductCommandHandler handler = handler = new UpdateProductCommandHandler(
+                MockProductRepository.Object,
+                mapper,
+                new UpdateProductValidator());
+
+            var result = await handler.Handle(request, new System.Threading.CancellationToken());
+
+            Assert.IsInstanceOf<IResult>(result);
+            Assert.IsFalse(result.IsSuccess);
+            Assert.AreSame(ValidationMessages.Id_Cannot_Be_Empty, result.Message);
         }
     }
 }
