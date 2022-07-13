@@ -42,6 +42,13 @@ namespace DapperORM.Application.Validations.Common
             return ruleBuilder
                 .NotEmpty().WithMessage(ValidationMessages.Product_Stock_Must_Greater_Than_Zero)
                 .GreaterThan(0).WithMessage(ValidationMessages.Product_Stock_Must_Greater_Than_Zero);
+        }
+
+        public static IRuleBuilderOptions<T, int> CheckProductCategoryId<T>(this IRuleBuilder<T, int> ruleBuilder) where T : Product
+        {
+            return ruleBuilder
+                .NotEmpty().WithMessage(ValidationMessages.Product_Category_Id_Cannot_Be_Empty)
+                .GreaterThan(0).WithMessage(ValidationMessages.Product_Category_Id_Cannot_Be_Empty);
 
         }
     }

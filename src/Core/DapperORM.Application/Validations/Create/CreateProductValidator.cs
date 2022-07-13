@@ -13,6 +13,7 @@ namespace DapperORM.Application.Validations.Create
             RuleFor(p => p.QuantityPerUnit).CheckProductQuantity();
             RuleFor(p => p.UnitPrice).CheckProductPrice();
             RuleFor(p => p.UnitsInStock).CheckProductStock();
+            RuleFor(p => p.CategoryId).CheckProductCategoryId();
         }
     }
 }
