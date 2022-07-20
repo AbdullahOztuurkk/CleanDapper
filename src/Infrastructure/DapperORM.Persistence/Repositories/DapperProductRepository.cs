@@ -19,7 +19,7 @@ namespace DapperORM.Persistence.Repositories
             using (var conn = dapperContext.GetConnection())
             {
                 conn.Open();
-                return (List<Product>)conn.Query<List<Product>>(query);
+                return (List<Product>)conn.Query<Product>(query);
             }
         }
     }
